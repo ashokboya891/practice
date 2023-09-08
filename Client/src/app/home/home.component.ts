@@ -8,8 +8,13 @@ import { FormGroup } from '@angular/forms';
 })
 export class HomeComponent implements OnInit{
 
+  register=false;
+
     ngOnInit(): void {
-    // throw new Error('Method not implemented.');
+  }
+  registertoggle()
+  {
+    this.register=!this.register;
   }
   
 
