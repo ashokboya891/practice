@@ -1,1 +1,32 @@
-<p>register component</p>
+<!-- 
+<form   #registerForm="ngForm"  (ngSubmit)="register()" autocomplete="off"  class="d-flex" >
+  </form> -->
+
+<form  #registerForm="ngForm"  autocomplete="off" (ngSubmit)="register()" >
+
+  <div class="mb-3">   <input  name="username" 
+    [(ngModel)]="model.username"
+    class="form-control me-2" 
+    type="text" 
+    placeholder="Username">
+  </div>
+      <div>
+        <input   name="password" 
+        [(ngModel)]="model.password"
+         class="form-control me-2" 
+         type="password" 
+         placeholder="password">
+      </div>
+     <!--  <div class="mb-3">  checking whether we are getting input from home are not
+        <label for="">who is fav person</label>
+         <select class="form-select">
+          <option [value]="f.userName" *ngFor="let f of usersFromHomeComponent">
+          {{f.userName}}
+          </option>
+         </select>
+      </div> -->
+      <button class="btn btn-success" type="submit">Register</button>
+            <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+   
+   
+</form>

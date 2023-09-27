@@ -18,17 +18,17 @@ export class AppComponent implements OnInit{
   }
   ngOnInit(): void {
     this.setCurrentUser();
-    this.http.get('https://localhost:5001/api/users').subscribe({
-      next: (data) => {
-        this.users = data;
-      },
-      error: (error) => {
-        console.error(error);
-        complete:()=>console.log("Request has done");
+    // this.http.get('https://localhost:5001/api/users').subscribe({
+    //   next: (data) => {
+    //     this.users = data;
+    //   },
+    //   error: (error) => {
+    //     console.error(error);
+    //     complete:()=>console.log("Request has done");
         
-      }
+    //   }
       
-    })
+    // })
   }
   setCurrentUser()
   {

@@ -11,9 +11,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class AccountController:ControllerBase
+    // [ApiController]
+    // [Route("api/[controller]")]
+    public class AccountController:BaseapiController
     {
          private readonly DataContext _context ;
         private   readonly ITokenServices _TokenServices;

@@ -40,22 +40,20 @@ currentUser$=this.currentUserSource.asObservable();
   {
     this.currentUserSource.next(user);
   }
-  // GetUsers()
-  // {
-  //   return this.http.get<User>(this.baseUrl+'users');
-  // }
-  Register(model:any)
+  register(model:any)
   {
-    this.http.post<User>(this.baseUrl+'account/register',model)
-    .pipe(
-      map((response:User)=>{
-        const user=response;
-        if(user)
-        {
-            localStorage.setItem('user',JSON.stringify(user))
-            // this.currentUserSource.next(user);
-        }
-      })
-    )
+     return this.http.post<User>(this.baseUrl+ 'account/Register',model).pipe(
+       map(user=>{
+         if(user)
+         {
+           // localStorage.setItem('user',JSON.stringify(user))
+           // this.currentUserSource.next(user);
+             this.setCurrentUser(user);
+         }
+         return user;
+       })
+     )
+    
   }
+
 }

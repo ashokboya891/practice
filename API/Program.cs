@@ -1,18 +1,9 @@
-using System.Text;
-using API.Data;
+
 using API.Extensions;
-using API.interfaces;
-using API.services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+using API.Middleware;
+
 
 var builder = WebApplication.CreateBuilder(args);
-
-
-// Add services to the container.
-
-
 builder.Services.AddControllers();
 builder.Services.AddapplicationServices(builder.Configuration);
 builder.Services.AddIdentityService(builder.Configuration);
@@ -29,9 +20,18 @@ builder.Services.AddIdentityService(builder.Configuration);
 //         });
 //     });
 var app = builder.Build();
+app.UseMiddleware<ExceptionMiddleWare>();
+// if(builder.Environment.IsDevelopment())
+// {
+//     app.UseDeveloperExceptionPage();
+// }
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200", "https://localhost:58005"));
+
+app.UseCors(builder=>builder.AllowAnyHeader().AllowAnyMethod()
+.AllowCredentials()
+.WithOrigins("https://localhost:4200"));
+// app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200", "https://localhost:58005"));
 // app.UseCors(builder=>builder.AllowAnyHeader().AllowAnyMethod()
 // .AllowCredentials()
 // .WithOrigins("https://localhost:4200"));
