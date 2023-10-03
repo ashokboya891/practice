@@ -22,6 +22,9 @@ namespace API.Extensions
             services.AddDbContext<DataContext>(opt=>{
             opt.UseSqlite(configuration.GetConnectionString("Defaultconnection"));
             });
+            services.AddScoped<IUserRepository,UserRepository>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
         return services;
         }
         

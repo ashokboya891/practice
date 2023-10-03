@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "ZnFjIH/RsUW9eh6SEfFkNx6DQmisPsfXs2YATS5W1ebzfr5TRTPTuQWUSUlYieIyGPGKAAVMN3gQ9j6jCBYvWg==",
+  "dgSpecHash": "FFN/8EWNeQOz+Bjd+PRE7sRxfp9MUHywIHwiaPdCn1vz13d81JVGNIoXQhuv0PYVMsJZDSY0D8bSFP8kz7uprg==",
   "success": true,
   "projectFilePath": "C:\\dotnet\\Insta\\API\\API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\91891\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\91891\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\91891\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\91891\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.10\\microsoft.aspnetcore.authentication.jwtbearer.7.0.10.nupkg.sha512",
-    "C:\\Users\\91891\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\91891\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\91891\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.10\\microsoft.data.sqlite.core.7.0.10.nupkg.sha512",
     "C:\\Users\\91891\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.10\\microsoft.entityframeworkcore.7.0.10.nupkg.sha512",
     "C:\\Users\\91891\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.10\\microsoft.entityframeworkcore.abstractions.7.0.10.nupkg.sha512",

@@ -1,6 +1,8 @@
 
+using API.Data;
 using API.Extensions;
 using API.Middleware;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,5 +44,24 @@ app.UseHttpsRedirection();
 
 
 app.MapControllers();
+using var scope=app.Services.CreateScope();
+var services=scope.ServiceProvider;
+try{
+       var context = services.GetRequiredService<DataContext>();
+        await context.Database.MigrateAsync();
+        await Seed.SeedUsers(context);
+    // var userManager=services.GetRequiredService<UserManager<AppUser>>();
+    // var roleManager=services.GetRequiredService<RoleManager<AppRole>>();
 
+   
+    // await Seed.ClearConnections(context);
+    // await context.Database.ExecuteSqlRawAsync("DELETE FROM [Connections]");  //after adding migration  problem will raise so added new method in seed.cs so it got commented
+    // context.connections.RemoveRange(context.connections);
+    // await Seed.SeedUsers(userManager,roleManager);
+}
+catch(Exception ex)
+{
+    var logger=services.GetService<ILogger<Program>>();
+    logger.LogError(ex,"An Error occured druing migration");
+}
 app.Run();

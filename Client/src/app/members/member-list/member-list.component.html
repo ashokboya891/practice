@@ -1,1 +1,15 @@
-<p>member-list works!</p>
+<!-- <div>
+    <ul *ngFor="let f of users">
+        <li >
+            {{f.userName}}
+            {{f.age}}
+             <img src="{{f.photoUrl}}" alt="">
+        </li>
+    </ul>
+</div> -->
+
+<div class="row">
+    <div class="col-2" *ngFor="let member of members">
+        <app-member-cards [member]="member"></app-member-cards>
+    </div>
+</div>

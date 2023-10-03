@@ -69,3 +69,6 @@ C:\dotnet\Insta\API\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
 C:\dotnet\Insta\API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\dotnet\Insta\API\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
 C:\dotnet\Insta\API\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\dotnet\Insta\API\bin\Debug\net7.0\Data\UserDataSeed.json
+C:\dotnet\Insta\API\bin\Debug\net7.0\AutoMapper.dll
+C:\dotnet\Insta\API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
