@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { MembersService } from 'src/app/_services/members.service';
 import { Member } from 'src/app/models/member';
 
@@ -8,23 +9,26 @@ import { Member } from 'src/app/models/member';
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
-  members:Member[]=[];
+  members$:Observable<Member[]>|undefined;
 
   ngOnInit(): void {
-    this.getMembers();
+    this.members$=this.memberService.getMembers();
+    // this.getMembers();
   }
 
-constructor(private member:MembersService) {
+constructor(private memberService:MembersService) {
   
 }
-  getMembers()
-  {
-    this.member.getMembers().subscribe({next:resp=>{
-      this.members=resp;
-      console.log(resp);
+
+// commented below methods after using store method in section 10 124 like memory to store data instead of asking every time server 
+  // getMembers()
+  // {
+  //   this.member.getMembers().subscribe({next:resp=>{
+  //     this.members=resp;
+  //     console.log(resp);
       
-    }})
-  }
+  //   }})
+  // }
    
 
 }

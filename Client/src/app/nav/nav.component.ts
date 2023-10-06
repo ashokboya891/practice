@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of, take, takeLast } from 'rxjs';
 import { User } from '../models/User';
 import { ToastrService } from 'ngx-toastr';
 
@@ -13,7 +13,11 @@ import { ToastrService } from 'ngx-toastr';
 export class NavComponent implements OnInit{
   model:any={};
  currentUser$:Observable<User|null >=of(null);
+ user:any;
   constructor(public accountService:AccountService,private rou:Router,private toastr:ToastrService) {
+    this.accountService.currentUser$.pipe(take(1)).subscribe({
+      next:user=>this.user=user
+    })
     
   }
   ngOnInit(): void {

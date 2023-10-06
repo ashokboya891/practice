@@ -1,5 +1,6 @@
 
 
+using System.Security.Claims;
 using API.Data;
 using API.DTOs;
 using API.Entities;
@@ -54,6 +55,23 @@ namespace API.Controllers
             // return _mapper.Map<MemberDto>(user);
             // return await sqlite3_context.Users.findallasync(id);
            
+        }
+        [HttpPut]
+         public async Task<ActionResult>UpdateUser(MemberUpdateDto memberUpdateDto)
+        {
+                // var username=User.FindFirst(ClaimTypes.NameIdentifier)?.Value;  --this line removed and added inside cliamsprincipal extension
+                // var user=await _uow.userRepository.GetUserByUserNameAsync(User.GetUsername());
+                // if(user==null)return NotFound();
+                // _Mapper.Map(memberUpdateDto,user);
+                // if(await _uow.Complete())return NoContent();
+                // return BadRequest("Failed to update user");
+
+                var username=User.FindFirst(ClaimTypes.Name)?.Value;
+                var user=await _userRepository.GetUserByUsernameAsync(username);
+                if(user==null)return NotFound();
+                _mapper.Map(memberUpdateDto,user);
+                if(await _userRepository.SaveAllAsync()) return NoContent ();
+                return BadRequest("failed to update user");
         }
     }
 }

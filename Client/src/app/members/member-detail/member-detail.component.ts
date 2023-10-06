@@ -17,7 +17,7 @@ import { GalleryModule, GalleryItem, ImageItem } from 'ng-gallery';
   
 })
 export class MemberDetailComponent  implements OnInit{
-  member:Member|undefined;
+  member: Member | undefined;
   images:GalleryItem[]=[]
   ngOnInit(): void {
     this.loadMember();
