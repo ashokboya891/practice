@@ -1,11 +1,15 @@
 
 using API.Data;
 using API.Extensions;
+using API.interfaces;
 using API.Middleware;
+using API.services;
 using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddScoped<ITokenServices,TokenService>();
+
 builder.Services.AddControllers();
 builder.Services.AddapplicationServices(builder.Configuration);
 builder.Services.AddIdentityService(builder.Configuration);
@@ -33,10 +37,7 @@ app.UseAuthorization();
 app.UseCors(builder=>builder.AllowAnyHeader().AllowAnyMethod()
 .AllowCredentials()
 .WithOrigins("https://localhost:4200"));
-// app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200", "https://localhost:58005"));
-// app.UseCors(builder=>builder.AllowAnyHeader().AllowAnyMethod()
-// .AllowCredentials()
-// .WithOrigins("https://localhost:4200"));
+
 
 
 app.UseHttpsRedirection();

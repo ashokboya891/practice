@@ -72,3 +72,5 @@ C:\dotnet\Insta\API\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdCon
 C:\dotnet\Insta\API\bin\Debug\net7.0\Data\UserDataSeed.json
 C:\dotnet\Insta\API\bin\Debug\net7.0\AutoMapper.dll
 C:\dotnet\Insta\API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\dotnet\Insta\API\bin\Debug\net7.0\CloudinaryDotNet.dll
+C:\dotnet\Insta\API\bin\Debug\net7.0\Newtonsoft.Json.dll

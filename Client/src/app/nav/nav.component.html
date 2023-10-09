@@ -2,7 +2,7 @@
     <div class="container">
       <a class="navbar-brand" routerLink="/members">Dating App</a>
      
-        <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="currentUser$ | async">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="accountService.currentUser$ | async">
           <ng-container >
 
             <li class="nav-item">
@@ -25,22 +25,31 @@
             <a class="nav-link " routerLink="/errors" routerLinkActive="active">errors</a>
           </li>
         </ul>
+        
+        <div class="dropdown" *ngIf="accountService.currentUser$ |async as user" dropdown>
+          <img src="{{user.photoUrl || './assets/user.png'}}" alt="">
+                <a class="dropdown-toggle text-light text-decoration-none ms-3" dropdownToggle>welcome {{user.username | titlecase}}</a>
+                <div class="dropdown-menu" *dropdownMenu="">
+                    <a class="dropdown-item" routerLink="/member/edit">Edit profile</a>
+                    <a class="dropdown-item" (click)="logout()">Logout</a>
 
+                </div>
+        </div>
 
-        <div class="dropdown" *ngIf="currentUser$ | async" dropdown>
-          <img src="" alt="">
-                <a class="dropdown-toggle text-light text-decoration-none ms-3" dropdownToggle>welcome</a>
+        <!-- <div class="dropdown" *ngIf="currentUser$ | async" dropdown>
+          <img src="{{user.photoUrl}}" alt="user photo">
+                <a class="dropdown-toggle text-light text-decoration-none ms-3" dropdownToggle>welcome {{user.username}}</a>
                 <div class="dropdown-menu" *dropdownMenu="">
                     <a class="dropdown-item" routerLink="member/edit" >Edit profile</a>
                     <a class="dropdown-item" (click)="logout()">Logout</a>
                   
 
                 </div>
-        </div>
+        </div> -->
         <!-- <button *ngIf="currentUser$ | async">  <a class="dropdown-item" (click)="logout()">Logout</a></button> -->
 
 
-        <form *ngIf="! (currentUser$ |async)"  #loginform="ngForm" (ngSubmit)="login()"   autocomplete="off"  class="d-flex" >
+        <form *ngIf="! (accountService.currentUser$ |async)"  #loginform="ngForm" (ngSubmit)="login()"   autocomplete="off"  class="d-flex" >
           <input  name="username" 
           [(ngModel)]="model.username"
           class="form-control me-2" 

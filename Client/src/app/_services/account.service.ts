@@ -23,9 +23,11 @@ constructor(private http:HttpClient)
         const user=response;
         if(user)
         {
-            localStorage.setItem('user',JSON.stringify(user))
+          this.setCurrentUser(user);
 
-            this.currentUserSource.next(user);
+            // localStorage.setItem('user',JSON.stringify(user))
+
+            // this.currentUserSource.next(user);
         }
       })
     )
@@ -39,6 +41,8 @@ constructor(private http:HttpClient)
   }
   setCurrentUser(user:User)
   {
+    localStorage.setItem('user',JSON.stringify(user))
+
     this.currentUserSource.next(user);
   }
   register(model:any)
