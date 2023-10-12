@@ -5,6 +5,7 @@ using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Helpers;
 using API.interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -15,8 +16,8 @@ using SQLitePCL;
 namespace API.Controllers
 {
     [Authorize]
-    [ApiController]
-    [Route("api/[controller]")]
+    // [ApiController]
+    // [Route("api/[controller]")]
     public class UsersController:BaseapiController
     {
         // AFTER ADDING REPOSITORY PATTERN AM GOING TO USER iUSERREPOSITORY WHICH IS IMPLEMTED BY USERREPOSITORY IN DATA,INTERFACES
@@ -39,15 +40,29 @@ namespace API.Controllers
         }
         [AllowAnonymous]
         [HttpGet]
-        public  async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
+        public  async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
-            // after adding iuserrepo and userrepo 
+
+            var currentuser=await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            userParams.CurrentUser=currentuser.UserName;
+            if(string.IsNullOrEmpty(userParams.Gender))
+            {
+                userParams.Gender=currentuser.Gender=="male"?"female":"male";
+
+            }
+               var users=await _userRepository.GetMembersAsync(userParams);
+    
+            Response.AddPaginationHeader(new PaginationHeader(users.CurrentPage,
+            users.PageSize,users.TotalCount,users.TotalPages));
+           return Ok(users);
+
+             // after adding iuserrepo and userrepo 
             // var users= await _context.Users.ToListAsync();
             // var user= await _userRepository.GetUsersAsync();
             // return users;
-            var users= await  _userRepository.GetMembersAsync();
+            // var users= await  _userRepository.GetMembersAsync();
             // var userToreturn=_mapper.Map<IEnumerable<MemberDto>>(users);
-            return Ok(users);
+            // return Ok(users);
        
         }
         // [Authorize]

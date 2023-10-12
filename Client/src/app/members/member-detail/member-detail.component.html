@@ -2,8 +2,8 @@
     <div class="col-4">
         <div class="card">
 
-            <img src="{{member?.photoUrl || './assets/user.png'}}" class="card-img-top img-thumbnail"
-            alt="{{member?.knownAs}}">
+            <img src="{{member.photoUrl || './assets/user.png'}}" class="card-img-top img-thumbnail"
+            alt="{{member.knownAs}}">
             <div class="card-body">
                 <div class="mb-2" >
                     <i class="class fa fa-user-circle text-success">
@@ -12,23 +12,23 @@
                      
                 </div>
                 <strong>Name:</strong>
-                <p>{{member?.userName}}</p>
+                <p>{{member.userName}}</p>
             </div>
             <div class="card-body">
                 <strong>Location:</strong>
-                <p>{{member?.city}}</p>
+                <p>{{member.city}}</p>
             </div>
             <div class="card-body">
                 <strong>Age:</strong>
-                <p>{{member?.age}}</p>
+                <p>{{member.age}}</p>
             </div>
             <div class="card-body">
                 <strong>lastActive:</strong>
-                <p>{{member?.lastActive}}</p>
+                <p>{{member.lastActive +'Z'  | timeago}}</p>
             </div>
             <div class="card-body">
                 <strong>started:</strong>
-                <p>{{member?.created | date:'dd MMM YYYY'}}</p>
+                <p>{{member.created | date:'dd MMM YYYY'}}</p>
             </div>
             <div class="card-footer">
                     <div class="btn-group d-flex">
@@ -40,16 +40,16 @@
     </div>
     <div class="col-8">
         <tabset class="member-tabset" #memberTabs>
-            <tab heading="About-{{member?.knownAs}}" >
+            <tab heading="About-{{member.knownAs}}" >
                 <h4>
                     Description
                 </h4>
-                <p>{{member?.introduction}}</p>
+                <p>{{member.introduction}}</p>
                 <h4>Looking for</h4>
-                <p>{{member?.lookingFor}}</p>
+                <p>{{member.lookingFor}}</p>
             </tab>
             <tab heading="Interests" >
-                <h4>Interests</h4><p>{{member?.interests}}</p>
+                <h4>Interests</h4><p>{{member.interests}}</p>
             </tab>
        
              <tab heading="Photos" #photoTab="tab" >

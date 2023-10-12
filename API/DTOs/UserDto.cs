@@ -13,6 +13,7 @@ namespace API.DTOs
 
         public string PhotoUrl{set;get;}
 
-
+        public string KnownAs{set;get;}
+        public string Gender{set;get;}
     }
 }

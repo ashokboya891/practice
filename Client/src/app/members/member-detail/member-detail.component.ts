@@ -6,6 +6,7 @@ import {  CommonModule} from "@angular/common";
 import { TabDirective, TabsModule, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { ReactiveFormsModule,FormsModule } from "@angular/forms";
 import { GalleryModule, GalleryItem, ImageItem } from 'ng-gallery';
+import { TimeagoModule } from "ngx-timeago";
 
 
 @Component({
@@ -13,12 +14,12 @@ import { GalleryModule, GalleryItem, ImageItem } from 'ng-gallery';
   standalone:true,
   templateUrl: './member-detail.component.html',
   styleUrls: ['./member-detail.component.css'],
-  imports:[CommonModule,TabsModule,ReactiveFormsModule,FormsModule,GalleryModule]
+  imports:[CommonModule,TabsModule,ReactiveFormsModule,FormsModule,GalleryModule,TimeagoModule]
   
 })
 export class MemberDetailComponent  implements OnInit{
-  member: Member | undefined;
-  images:GalleryItem[]=[]
+  member:Member={} as Member;
+    images:GalleryItem[]=[]
   ngOnInit(): void {
     this.loadMember();
   }
@@ -48,8 +49,8 @@ export class MemberDetailComponent  implements OnInit{
     for(const photo of this.member?.photos)
     {
       this.images.push(new ImageItem({src:photo.url,thumb:photo.url}));
-      this.images.push(new ImageItem({src:photo.url,thumb:photo.url}));
-      this.images.push(new ImageItem({src:photo.url,thumb:photo.url}));
+      // this.images.push(new ImageItem({src:photo.url,thumb:photo.url}));
+      // this.images.push(new ImageItem({src:photo.url,thumb:photo.url}));
     }
   }
 }

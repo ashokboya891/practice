@@ -23,8 +23,10 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { DatePickerComponent } from './_forms/date-picker/date-picker.component';
 @NgModule({
-  declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent, ListsComponent, MessagesComponent, MemberListComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent, MemberCardsComponent, MemberEditComponent, PhotoEditorComponent],
+  declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent, ListsComponent, MessagesComponent, MemberListComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent, MemberCardsComponent, MemberEditComponent, PhotoEditorComponent, TextInputComponent, DatePickerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,7 +34,8 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   
   ],
   providers: [
