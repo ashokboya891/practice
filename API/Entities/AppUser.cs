@@ -22,7 +22,14 @@ namespace API.Entities
         public string Interests{set;get;}
         public string City{set;get;}
         public string Country{set;get;}
+
         public List<Photo> Photos{set;get;}=new();
+
+        public List<UserLike> LikedByUsers{set;get;}
+
+        public List<UserLike> LikedUsers{set;get;}
+
+
     
         // public int GetAge()
         // {

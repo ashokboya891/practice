@@ -12,7 +12,7 @@ namespace API.Helpers
       
         public PagedList(IEnumerable<T> items,int Count,int pageNumber, int pageSize)
         {
-            CurrentPage = pageNumber;
+            
             TotalPages = (int)Math.Ceiling(Count/(double)pageSize);
             PageSize = pageSize;
             TotalCount = Count;

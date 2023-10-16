@@ -1,6 +1,6 @@
 <!-- two way binding below  regist form it going to comment after done with section 12 total different approch -->
 
-<form  [formGroup]="registerForm"  autocomplete="off" (ngSubmit)=" registerForm.valid && register()" >
+<form [formGroup]="registerForm" (ngSubmit)="registerForm.valid &&  register()" autocomplete="off">
   <h1 class="text-center text-primary ">sign up</h1>
   <div class="mb-3">
     <label style="margin-right: 10px;">I am: </label>
@@ -80,6 +80,6 @@
    
 </form>
 
-<p>form vale{{registerForm.value|json}}</p>
-<p>form SATUS{{registerForm.status|json}}</p>
+<!-- <p>form vale{{registerForm.value|json}}</p>
+<p>form SATUS{{registerForm.status|json}}</p> -->
 
