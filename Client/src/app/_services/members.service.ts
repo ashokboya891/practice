@@ -21,7 +21,7 @@ userParams:userParams|undefined;
 
   constructor(private http:HttpClient,private accountService:AccountService)
    { 
-    this.accountService.currentUser$.pipe(take(2)).subscribe({
+    this.accountService.currentUser$.pipe(take(1)).subscribe({
       next:user=>{
         if(user)
         {
