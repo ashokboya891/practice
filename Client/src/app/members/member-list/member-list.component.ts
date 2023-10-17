@@ -12,7 +12,12 @@ import { userParams } from 'src/app/models/userParams';
   templateUrl: './member-list.component.html',
   styleUrls: ['./member-list.component.css']
 })
+
+
+
 export class MemberListComponent implements OnInit {
+
+
   // members$:Observable<Member[]>|undefined;
   members:Member[]=[];
   pagination:Pagination | undefined;
