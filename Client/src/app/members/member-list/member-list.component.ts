@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, take } from 'rxjs';
 import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
-import { User } from 'src/app/models/User';
-import { Member } from 'src/app/models/member';
-import { Pagination } from 'src/app/models/pagination';
-import { userParams } from 'src/app/models/userParams';
+import { User } from 'src/app/_models/User';
+import { Member } from 'src/app/_models/member';
+import { Pagination } from 'src/app/_models/pagination';
+import { userParams } from 'src/app/_models/userParams';
 
 @Component({
   selector: 'app-member-list',

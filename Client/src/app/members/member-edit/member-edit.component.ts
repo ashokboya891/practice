@@ -4,8 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
 import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
-import { User } from 'src/app/models/User';
-import { Member } from 'src/app/models/member';
+import { User } from 'src/app/_models/User';
+import { Member } from 'src/app/_models/member';
 
 @Component({
   selector: 'app-member-edit',

@@ -1,17 +1,19 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Member } from '../models/member';
+import { Member } from '../_models/member';
 import { map, of, take } from 'rxjs';
-import { PaginatedResult } from '../models/pagination';
-import { userParams } from '../models/userParams';
+import { getPaginatedResult, getPaginationHeader } from './paginationHelper';
+import { userParams } from '../_models/userParams';
 import { AccountService } from './account.service';
-import { User } from '../models/User';
+import { User } from '../_models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MembersService {
+
+  
 members:Member[]=[];
 baseUrl=environment.apiUrl;
 memberCache=new Map();
@@ -48,7 +50,7 @@ userParams:userParams|undefined;
 
     //  console.log(Object.values(userParams).join('-'));
      
-    let params = this.getPaginationHeaders(userParams.pageNumber,userParams.pageSize);
+    let params = getPaginationHeader(userParams.pageNumber,userParams.pageSize);
     params=params.append('minAge',userParams.minAge);
     params=params.append('maxAge',userParams.maxAge);
     params=params.append('gender',userParams.gender);
@@ -56,7 +58,7 @@ userParams:userParams|undefined;
 
 
 
-    return this.getPaginatedResult<Member[]>(this.baseUrl+'users',params).pipe(
+    return getPaginatedResult<Member[]>(this.baseUrl+'users',params,this.http).pipe(
       map(response=>{
         this.memberCache.set(Object.values(userParams).join('-'),response);
         return response;
@@ -64,36 +66,39 @@ userParams:userParams|undefined;
     )
   }
 
+// this paginationheaders pagination result commented after adding paginationts file in model for clean code in message section
+  // private getPaginatedResult<T>(url:string,params: HttpParams) {
 
-  private getPaginatedResult<T>(url:string,params: HttpParams) {
+  //   const paginatedResult:PaginatedResult<T>=new PaginatedResult<T>;
 
-    const paginatedResult:PaginatedResult<T>=new PaginatedResult<T>;
+  //   return this.http.get<T>(url, { observe: 'response', params }).pipe(
+  //     map(response => {
+  //       if (response.body) {
+  //         paginatedResult.result = response.body;
+  //       }
+  //       const pagination = response.headers.get('Pagination');
+  //       if (pagination) {
+  //         paginatedResult.pagination = JSON.parse(pagination);
+  //       }
+  //       return paginatedResult;
+  //     })
 
-    return this.http.get<T>(url, { observe: 'response', params }).pipe(
-      map(response => {
-        if (response.body) {
-          paginatedResult.result = response.body;
-        }
-        const pagination = response.headers.get('Pagination');
-        if (pagination) {
-          paginatedResult.pagination = JSON.parse(pagination);
-        }
-        return paginatedResult;
-      })
-
-    );
-  }
+  //   );
+  // }
   
 
-  private getPaginationHeaders(pageNumber:number,pageSize:number) {
+  // private getPaginationHeaders(pageNumber:number,pageSize:number) {
 
-    let params = new HttpParams();
+  //   let params = new HttpParams();
    
-      params = params.append('pageNumber', pageNumber);
-      params = params.append('pageSize', pageSize);
+  //     params = params.append('pageNumber', pageNumber);
+  //     params = params.append('pageSize', pageSize);
     
-    return params;
-  }
+  //   return params;
+  // }
+
+
+
   resetUserParams()
   {
     
@@ -136,9 +141,9 @@ userParams:userParams|undefined;
     }
     getLikes(predicate:string,pageNumber:number,pageSize:number)
     {
-      let params=this.getPaginationHeaders(pageNumber,pageSize);
+      let params=getPaginationHeader(pageNumber,pageSize);
       params=params.append('predicate',predicate);
-      return this.getPaginatedResult<Member[]>(this.baseUrl+'likes',params);
+      return getPaginatedResult<Member[]>(this.baseUrl+'likes',params,this.http);
       // return this.http.get<Member[]>(this.baseUrl+'likes?predicate='+predicate,{});
 
     }

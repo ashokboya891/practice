@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { User } from '../models/User';
+import { User } from '../_models/User';
 
 @Component({
   selector: 'app-home',

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { MembersService } from 'src/app/_services/members.service';
-import { Member } from 'src/app/models/member';
+import { Member } from 'src/app/_models/member';
 
 @Component({
   selector: 'app-member-cards',

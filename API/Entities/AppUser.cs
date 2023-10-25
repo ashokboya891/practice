@@ -27,6 +27,10 @@ namespace API.Entities
         public List<UserLike> LikedByUsers{set;get;} 
 
         public List<UserLike> LikedUsers{set;get;}
+        public List<Message> MessageSent{set;get;}
+        public List<Message> MessageReceived{set;get;}
+
+
     
         // public int GetAge()
         // {

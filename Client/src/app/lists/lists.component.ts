@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from '../models/member';
+import { Member } from '../_models/member';
 import { MembersService } from '../_services/members.service';
-import { Pagination } from '../models/pagination';
-import { userParams } from '../models/userParams';
+import { Pagination } from '../_models/pagination';
+import { userParams } from '../_models/userParams';
 
 @Component({
   selector: 'app-lists',

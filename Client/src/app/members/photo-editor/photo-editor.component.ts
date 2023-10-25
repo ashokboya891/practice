@@ -3,9 +3,9 @@ import { FileUploader } from 'ng2-file-upload';
 import { take } from 'rxjs';
 import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
-import { Photo } from 'src/app/models/Photo';
-import { User } from 'src/app/models/User';
-import { Member } from 'src/app/models/member';
+import { Photo } from 'src/app/_models/Photo';
+import { User } from 'src/app/_models/User';
+import { Member } from 'src/app/_models/member';
 import { environment } from 'src/environments/environment';
 
 @Component({
