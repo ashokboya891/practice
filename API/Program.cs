@@ -1,9 +1,11 @@
 
 using API.Data;
+using API.Entities;
 using API.Extensions;
 using API.interfaces;
 using API.Middleware;
 using API.services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -31,12 +33,12 @@ app.UseMiddleware<ExceptionMiddleWare>();
 // {
 //     app.UseDeveloperExceptionPage();
 // }
-app.UseAuthentication();
-app.UseAuthorization();
 
 app.UseCors(builder=>builder.AllowAnyHeader().AllowAnyMethod()
 .AllowCredentials()
 .WithOrigins("https://localhost:4200"));
+app.UseAuthentication();
+app.UseAuthorization();
 
 
 
@@ -48,17 +50,13 @@ app.MapControllers();
 using var scope=app.Services.CreateScope();
 var services=scope.ServiceProvider;
 try{
-       var context = services.GetRequiredService<DataContext>();
-        await context.Database.MigrateAsync();
-        await Seed.SeedUsers(context);
-    // var userManager=services.GetRequiredService<UserManager<AppUser>>();
-    // var roleManager=services.GetRequiredService<RoleManager<AppRole>>();
-
-   
-    // await Seed.ClearConnections(context);
-    // await context.Database.ExecuteSqlRawAsync("DELETE FROM [Connections]");  //after adding migration  problem will raise so added new method in seed.cs so it got commented
-    // context.connections.RemoveRange(context.connections);
-    // await Seed.SeedUsers(userManager,roleManager);
+    var context = services.GetRequiredService<DataContext>();
+    //    this below lines added after adding apsnet table and seeding our data into those tables we modifed seed class with userMnager 
+    //we added userman and roles mamnger after addiing roles in seed class so that seed line got roleman,userman
+    var userManager=services.GetRequiredService<UserManager<AppUser>>();
+    var roleManager=services.GetRequiredService<RoleManager<AppRole>>();
+    await context.Database.MigrateAsync();
+    await Seed.SeedUsers(userManager,roleManager);
 }
 catch(Exception ex)
 {

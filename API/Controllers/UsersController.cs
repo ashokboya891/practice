@@ -38,7 +38,9 @@ namespace API.Controllers
             _userRepository = userRepository;
 
         }
-        [AllowAnonymous]
+        // [AllowAnonymous]
+        // [Authorize(Roles="Member")]
+        [Authorize(Roles="Admin")]
         [HttpGet]
         public  async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
@@ -50,7 +52,7 @@ namespace API.Controllers
                 userParams.Gender=currentuser.Gender=="male"?"female":"male";
 
             }
-               var users=await _userRepository.GetMembersAsync(userParams);
+            var users=await _userRepository.GetMembersAsync(userParams);
     
             Response.AddPaginationHeader(new PaginationHeader(users.CurrentPage,
             users.PageSize,users.TotalCount,users.TotalPages));
@@ -66,6 +68,7 @@ namespace API.Controllers
        
         }
         // [Authorize]
+        [Authorize(Roles="Member")]
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {

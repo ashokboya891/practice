@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Entities
 {
-    public class AppUser
+    public class AppUser : IdentityUser<int>
     {
-        public int Id { get; set; }
-        public string UserName { get; set;}
-        public byte[] PassWordHash{set;get;}
-        public byte[] PassWordSalt{set;get;}
+        // this 4 comtd after adding identityuser cause it consist of those properties
+        // public int Id { get; set; }
+        // public string UserName { get; set;}
+        // public byte[] PasswordHash{set;get;}
+        // public byte[] PassWordSalt{set;get;}
         public DateOnly DateOfBirth{set;get;}
         public string KnownAs{set;get;}
         public DateTime Created{set;get;}=DateTime.UtcNow;
@@ -29,7 +31,7 @@ namespace API.Entities
         public List<UserLike> LikedUsers{set;get;}
         public List<Message> MessageSent{set;get;}
         public List<Message> MessageReceived{set;get;}
-
+        public ICollection<AppUserRole> UserRoles{set;get;}
 
     
         // public int GetAge()
