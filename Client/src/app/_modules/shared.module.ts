@@ -9,7 +9,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TimeagoModule } from "ngx-timeago";
-
+import { ModalModule } from 'ngx-bootstrap/modal';   //taking input from user in roles changing place valorsoft-components-modules
 @NgModule({
   declarations: [],
   imports: [
@@ -24,7 +24,8 @@ import { TimeagoModule } from "ngx-timeago";
     FileUploadModule,
     PaginationModule.forRoot(),
     ButtonsModule.forRoot(),
-    TimeagoModule.forRoot()
+    TimeagoModule.forRoot(),
+    ModalModule.forRoot()
     
 
   ],
@@ -37,7 +38,8 @@ import { TimeagoModule } from "ngx-timeago";
     BsDatepickerModule,
     PaginationModule,
     ButtonsModule,
-    TimeagoModule
+    TimeagoModule,
+    ModalModule
   ]
 })
 export class SharedModule { }
