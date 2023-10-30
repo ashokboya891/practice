@@ -39,8 +39,9 @@ namespace API.Controllers
 
         }
         // [AllowAnonymous]
+        // this way used to test funtionality of accessing data with roles or role included in jwt token
         // [Authorize(Roles="Member")]
-        [Authorize(Roles="Admin")]
+        // [Authorize(Roles="Admin")]
         [HttpGet]
         public  async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
@@ -68,7 +69,8 @@ namespace API.Controllers
        
         }
         // [Authorize]
-        [Authorize(Roles="Member")]
+        // this way used to test funtionality of accessing data with roles or role included in jwt token
+        // [Authorize(Roles="Member")]
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {

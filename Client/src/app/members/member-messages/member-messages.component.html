@@ -22,13 +22,13 @@
                         <div class="header">
                             <small class="text-muted">
                                 <span class="fa fa-clock-o">
-                                    {{message.messageSent }}
+                                    {{message.messageSent +'Z' | timeago}}
                                 </span>
                                 <span class="text-danger" *ngIf="!message.dateRead &&
                                  message.senderUsername!=username">(unread)
                                 </span>
                                 <span class="text-success" *ngIf="message.dateRead &&
-                                message.senderUsername!=username">(read{{message.dateRead | timeago}})
+                                message.senderUsername!=username">(read{{message.dateRead +'Z'| timeago}})
                                </span>
                             </small>
                         </div>
@@ -40,7 +40,7 @@
 
     </div>
     <div class="card-footer">
-        <form #messageForm="ngForm"  autocomplete="off">
+        <form #messageForm="ngForm"  (ngSubmit)="sendMessage()" autocomplete="off">
             <div class="input-group">
                 <input 
                 name="messageContent"

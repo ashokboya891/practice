@@ -63,6 +63,7 @@ export class MemberListComponent implements OnInit {
           {
             this.members=response.result;
             this.pagination=response.pagination;
+            
           }
         }
       })

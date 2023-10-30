@@ -2,8 +2,8 @@
     <div class="container">
       <a class="navbar-brand" routerLink="/members"><b>Instagram</b>  Web-App</a>
      
-        <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="accountService.currentUser$ | async">
-          <ng-container >
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <ng-container  *ngIf="accountService.currentUser$ | async">
 
             <li class="nav-item">
               <a class="nav-link " routerLink="/members" routerLinkActive="active">Matches</a>
@@ -14,16 +14,27 @@
             <li class="nav-item">
               <a class="nav-link " routerLink="/messages" routerLinkActive="active">Messages</a>
             </li>
-            <li  class="nav-item">
-              <a class="nav-link " routerLink="/errors" routerLinkActive="active">Errors</a>
+            <li  class="nav-item" *appHasRole="['Admin','Moderator']">
+              <a class="nav-link " routerLink="/admin" routerLinkActive="active">Admin</a>
             </li>
             <!-- <li class="nav-item" (click)="logout()">
               <a class="nav-link ">Logout</a>
             </li> -->
+         
+    
+            <!-- <li  class="nav-item">
+              <a class="nav-link " routerLink="/errors" routerLinkActive="active">Errors</a>
+            </li> -->
+            <!-- <li class="nav-item" (click)="logout()">
+              <a class="nav-link ">Logout</a>
+            </li> -->
           </ng-container>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link " routerLink="/errors" routerLinkActive="active">errors</a>
-          </li>
+          </li> -->
+           <li class="nav-item" *ngIf="!(accountService.currentUser$ | async)">
+            <a class="nav-link " routerLink="/errors" routerLinkActive="active">errors</a>
+          </li> 
         </ul>
         
         <div class="dropdown" *ngIf="accountService.currentUser$ |async as user" dropdown>

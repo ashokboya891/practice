@@ -34,4 +34,17 @@ export class MemberMessagesComponent  implements OnInit{
   //     })
   //   }
   // }
+
+  sendMessage()
+  {
+    if(!this.username) return;
+    // this.loading=true;
+    this.messageService.sendMessage(this.username,this.messageContent).subscribe({
+
+     
+      
+      next:messages=>this.messages.push(messages)
+      // this.messageForm.reset();
+    })
+  }
 }

@@ -12,7 +12,7 @@ namespace API.Controllers
 {
     public class LikesController:BaseapiController
     {
-         public ILikeRepository _likesRepository;
+        public ILikeRepository _likesRepository;
         public IUserRepository _userRepository { get; }
 
         public LikesController(IUserRepository userRepository,ILikeRepository likesRepository)
@@ -20,7 +20,7 @@ namespace API.Controllers
             _userRepository = userRepository;
             _likesRepository = likesRepository;      
         }
-         [HttpPost("{username}")]
+        [HttpPost("{username}")]
         public async Task<IActionResult> AddLike(string username)
         {
           
@@ -60,7 +60,7 @@ namespace API.Controllers
     }
 }
 
-          //this filed removed after adding untiofwork and commentin saveall method 
+    //this filed removed after adding untiofwork and commentin saveall method 
 //         private readonly IUserRepository _userRepository;
 //         private readonly LikesRepository _likesRespository;
 //         public LikesController(IUserRepository userRepository,LikesRepository likesRespository)

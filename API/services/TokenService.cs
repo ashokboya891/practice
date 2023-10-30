@@ -37,13 +37,13 @@ namespace API.services
             new Claim(JwtRegisteredClaimNames.UniqueName,user.UserName)
             // new Claim(JwtRegisteredClaimNames)
            };
+            // below two lines added after adding roles.approles,appuserrole,approle 210 we added roles into jwt token
             var roles= await _userManager.GetRolesAsync(user);
+            // this line meaning is of user is having one role it will store if had more roles it stores as array of roles
            claims.AddRange(roles.Select(role=>new Claim(ClaimTypes.Role,role)));
            
             var creds=new SigningCredentials(_key,SecurityAlgorithms.HmacSha512Signature);
-            // below two lines added after adding roles.approles,appuserrole,approle 210 we added roles into jwt token
 
-            // this line meaning is of user is having one role it will store if had more roles it stores as array of roles
 
             var tokenDescriptor=new SecurityTokenDescriptor
            {

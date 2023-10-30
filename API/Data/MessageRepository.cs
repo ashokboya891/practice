@@ -67,7 +67,7 @@ namespace API.Data
                         && m.Sender.UserName == currentUserName && m.SenderDeleted == false
                 )
                 // .MarkUnreadAsRead(currentUserName)
-                .OrderByDescending(m => m.MessageSent)
+                .OrderBy(m => m.MessageSent)
                 // .ProjectTo<MessageDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
  
