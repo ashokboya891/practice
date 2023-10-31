@@ -10,6 +10,7 @@ import { TimeagoModule } from "ngx-timeago";
 import { MemberMessagesComponent } from '../member-messages/member-messages.component';
 import { MessageService } from 'src/app/_services/message.service';
 import { Message } from 'src/app/_models/message';
+import { PresenceService } from 'src/app/_services/presence.service';
 
 @Component({
   selector: 'app-member-detail',
@@ -40,7 +41,8 @@ export class MemberDetailComponent  implements OnInit{
     this.getImages()
 
   }
-  constructor( private mser:MembersService,private route:ActivatedRoute,private messageService:MessageService) {
+  constructor( private mser:MembersService,private route:ActivatedRoute,
+    private messageService:MessageService,public presenceService:PresenceService) {
     
   }
   onTabActivated(data:TabDirective)

@@ -7,6 +7,7 @@ using API.Data;
 using API.Helpers;
 using API.interfaces;
 using API.services;
+using API.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -32,6 +33,7 @@ namespace API.Extensions
             services.AddScoped<ILikeRepository,LikesRepository>();
             services.AddScoped<IMessageRepository,MessageRepository>();
             services.AddSignalR();
+            services.AddSingleton<PresenceTracker>();
 
         return services;
         }

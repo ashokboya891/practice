@@ -20,4 +20,16 @@
 .ngx-gallery{
     display: inline-block;
     margin-bottom: 20px;
+}.animate
+{
+    transition: all 0.3s ease-in-out;
+}
+@keyframes fa-blink{
+    0%{opacity: 1;}
+    100%{opacity: 0.4;}
+
+}
+.is-online{
+    animation: fa-blink 1.5s linear infinite;
+    color: rgb(235, 72, 27);
 }

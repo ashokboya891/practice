@@ -9,10 +9,13 @@ import { BehaviorSubject, take } from 'rxjs';
   providedIn: 'root'
 })
 export class PresenceService {
+  
 hubUrl=environment.hubUrl;
 private hubConnection?:HubConnection;
-// private onlineUserSource=new BehaviorSubject<string[]>([]);
-// onlineUsers$=this.onlineUserSource.asObservable();
+private onlineUserSource=new BehaviorSubject<string[]>([]);
+onlineUsers$=this.onlineUserSource.asObservable();
+
+
   constructor(private toastr:ToastrService)
   {
 
@@ -27,17 +30,32 @@ private hubConnection?:HubConnection;
 
     this.hubConnection.start().catch(error=>console.log(error));
 
+
+
     this.hubConnection.on('UserIsOnline',username=>{
 
       this.toastr.info(username+' has connected');
 
     })
 
+
+
     this.hubConnection.on("UserIsOffline",username=>{
 
       this.toastr.warning(username+' has disconnected')
 
     })
+
+
+    this.hubConnection.on('GetOnlineUsers',usernames=>{
+      this.onlineUserSource.next(usernames);
+    })
+
+    // this.hubConnection.on('GetOfflineUsers',usernames=>{
+    //   this.onlineUserSource.next(usernames);
+    // })
+
+
   }
   stopHubConnection()
   {
