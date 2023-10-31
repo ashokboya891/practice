@@ -5,6 +5,7 @@ using API.Extensions;
 using API.interfaces;
 using API.Middleware;
 using API.services;
+using API.SignalR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,9 +35,11 @@ app.UseMiddleware<ExceptionMiddleWare>();
 //     app.UseDeveloperExceptionPage();
 // }
 
-app.UseCors(builder=>builder.AllowAnyHeader().AllowAnyMethod()
-.AllowCredentials()
-.WithOrigins("https://localhost:4200"));
+app.UseCors(builder=>builder
+.AllowAnyHeader()
+.AllowAnyMethod()
+.AllowCredentials()  
+.WithOrigins("https://localhost:4200"));  // allow credentials added this line added after adding presence hub,applicserex and identitserex ,programcs
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -47,6 +50,7 @@ app.UseHttpsRedirection();
 
 
 app.MapControllers();
+app.MapHub<PresenceHub>("hubs/presence");
 using var scope=app.Services.CreateScope();
 var services=scope.ServiceProvider;
 try{
