@@ -10,10 +10,10 @@ namespace API.SignalR
         private static readonly Dictionary<string,List<string>>  OnlineUsers=
        new Dictionary<string,List<string>>();
 
-       public Task UserConnected(string username,string connectionId)
+       public Task<bool> UserConnected(string username,string connectionId)
        {
 
-        // bool isOnline=false;
+        bool isOnline=false;   //this line addded  in 237 optimization
         //dictionary is not a thared safe type of object so we are using lock only online connetced users will get locked 
         lock(OnlineUsers)
         {
@@ -23,29 +23,31 @@ namespace API.SignalR
             }
             else{
                 OnlineUsers.Add(username,new List<string>{connectionId});
-                // isOnline=true;
+                isOnline=true; //this line addded  in 237 optimization
             }
         }
-        //  return Task.FromResult(isOnline);
-        return Task.CompletedTask;
+         return Task.FromResult(isOnline);   //this line addded  in 237 optimization return bool aslo added for improving perfomnace presence hub
+        // return Task.CompletedTask;
        }
 
 
-       public Task UserDisconnected(string username,string connectionId)
+       public Task<bool> UserDisconnected(string username,string connectionId)
         {
-            // bool isOffline=false;
+            bool isOffline=false;  //this line addded  in 237 optimization return bool aslo added for improving perfomnace presence hub
 
             lock (OnlineUsers)
             {
-                if(!OnlineUsers.ContainsKey(username)) return Task.CompletedTask;
+                if(!OnlineUsers.ContainsKey(username)) return Task.FromResult(isOffline);
 
                 OnlineUsers[username].Remove(connectionId);
                 if(OnlineUsers[username].Count==0)
                 {
                     OnlineUsers.Remove(username);
+                    isOffline=true;
                  
                 }
-                return Task.CompletedTask;
+                return Task.FromResult(isOffline);
+                // return Task.CompletedTask;   //this line addded  in 237 optimization return bool aslo added for improving perfomnace presence hub
 
             
             }

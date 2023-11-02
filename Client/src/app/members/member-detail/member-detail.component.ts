@@ -11,6 +11,9 @@ import { MemberMessagesComponent } from '../member-messages/member-messages.comp
 import { MessageService } from 'src/app/_services/message.service';
 import { Message } from 'src/app/_models/message';
 import { PresenceService } from 'src/app/_services/presence.service';
+import { User } from 'src/app/_models/User';
+import { AccountService } from 'src/app/_services/account.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-member-detail',
@@ -20,18 +23,20 @@ import { PresenceService } from 'src/app/_services/presence.service';
   imports:[CommonModule,TabsModule,ReactiveFormsModule,FormsModule,GalleryModule,TimeagoModule,MemberMessagesComponent]
   
 })
-export class MemberDetailComponent  implements OnInit{
+export class MemberDetailComponent  implements OnInit,OnDestroy{
   @ViewChild('memberTabs',{static:true})memberTabs?:TabsetComponent;
   activeTab?:TabDirective;
   member:Member={} as Member;  //we can keep mebers:Memers|undefined but it represents undefined if we do this in this way atleat empty obj will intialized and ts obj so no need for optional chainig ? in html code & no need of ngif in first line 
   images:GalleryItem[]=[]
   messages:Message[]=[];
+  user?:User;
+
   ngOnInit(): void {
 
     this.route.data.subscribe({
       next:data=>this.member=data['member']
     })
-
+   
     // this.loadMember();
     this.route.queryParams.subscribe({
       next:params=>{
@@ -41,21 +46,31 @@ export class MemberDetailComponent  implements OnInit{
     this.getImages()
 
   }
-  constructor( private mser:MembersService,private route:ActivatedRoute,
-    private messageService:MessageService,public presenceService:PresenceService) {
-    
+  ngOnDestroy(): void {
+    this.messageService.stopHubConnection();
+  }
+
+  constructor( private accountService:AccountService,private route:ActivatedRoute,
+  private messageService:MessageService,public presenceService:PresenceService) 
+  {
+
+    this.accountService.currentUser$.pipe(take(1)).subscribe({
+      next:user=>{
+        if(user)this.user=user;
+      }
+    }) ;
   }
   onTabActivated(data:TabDirective)
   {
     this.activeTab=data;
-    if(this.activeTab.heading==='Messages')
+    if(this.activeTab.heading==='Messages' && this.user)
     {
-      // this.m.createHubConnection(this.user,this.member.userName);
+      this.messageService.createHubConnection(this.user,this.member.userName);
       this.loadMessages();
     }
-    // else{
-    // this.messageService.stopHubConnection();
-    // }
+    else{
+    this.messageService.stopHubConnection();
+    }
   }
   loadMessages()
   {

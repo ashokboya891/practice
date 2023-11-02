@@ -51,6 +51,7 @@ app.UseHttpsRedirection();
 
 app.MapControllers();
 app.MapHub<PresenceHub>("hubs/presence");
+app.MapHub<MessageHub>("hubs/message");
 using var scope=app.Services.CreateScope();
 var services=scope.ServiceProvider;
 try{
@@ -60,6 +61,8 @@ try{
     var userManager=services.GetRequiredService<UserManager<AppUser>>();
     var roleManager=services.GetRequiredService<RoleManager<AppRole>>();
     await context.Database.MigrateAsync();
+    // context.connections.RemoveRange(context.connections);
+    await context.Database.ExecuteSqlRawAsync("DELETE FROM [connections]");
     await Seed.SeedUsers(userManager,roleManager);
 }
 catch(Exception ex)

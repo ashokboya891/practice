@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Message } from 'src/app/_models/message';
 import { MessageService } from 'src/app/_services/message.service';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,8 @@ import { TimeagoModule } from "ngx-timeago";
 })
 export class MemberMessagesComponent  implements OnInit{
   @Input() username?:string;
-  @Input()  messages:Message[]=[]; 
+  // @Input()  messages:Message[]=[];     <!--  line we are sending messages to components but after adding message hub in aoi,message service to singalusing we are getting messages from signalr only we commented this line after messageservice connecting to message hub with signalR -->
+  @ViewChild('messageForm') messageForm?:NgForm;
  messageContent='';
 
   constructor(public messageService:MessageService) {
@@ -38,13 +39,20 @@ export class MemberMessagesComponent  implements OnInit{
   sendMessage()
   {
     if(!this.username) return;
-    // this.loading=true;
-    this.messageService.sendMessage(this.username,this.messageContent).subscribe({
+    this.messageService.sendMessage(this.username,this.messageContent).then(()=>{
+      this.messageForm?.reset();
+    })
+   
+    // if(!this.username) return;
+    // // this.loading=true;
+    // this.messageService.sendMessage(this.username,this.messageContent).subscribe({
 
      
       
-      next:messages=>this.messages.push(messages)
+    //  next:messages=>console.log("")
+     
+      // this.messages.push(messages)
       // this.messageForm.reset();
-    })
+    // })
   }
 }

@@ -32,6 +32,8 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { ConfirmDailogComponent } from './modals/confirm-dailog/confirm-dailog.component';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
+import { RouteReuseStrategy } from '@angular/router';
+import { CustomRouteReuseStartegy } from './_services/CustomRouteReuseStartegy';
 @NgModule({
   declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent, ListsComponent, MessagesComponent, MemberListComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent, MemberCardsComponent, MemberEditComponent, PhotoEditorComponent, TextInputComponent, DatePickerComponent, AdminPanelComponent, HasRoleDirective, UserManagementComponent, PhotoManagementComponent, ConfirmDailogComponent, RolesModalComponent],
   imports: [
@@ -54,6 +56,9 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
     },
     {
       provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true
+    },
+    {
+      provide:RouteReuseStrategy,useClass:CustomRouteReuseStartegy
     }
   ],
   bootstrap: [AppComponent]
